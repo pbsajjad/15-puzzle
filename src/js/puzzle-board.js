@@ -7,7 +7,7 @@ export class PuzzleBoard {
   #emptyTileIndex;
 
   constructor(boardSize, puzzleBoardElement) {
-    this.#boardSize = boardSize;
+    this.#boardSize = boardSize || 4;
     this.#puzzleBoardElement = puzzleBoardElement;
     this.#tiles = [];
     this.#emptyTileIndex;
