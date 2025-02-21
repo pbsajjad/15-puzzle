@@ -17,6 +17,15 @@ export class PuzzleBoard {
     this.tileNumbers = shuffleNumbers(this.tileNumbers);
     this.emptyTileIndex = this.tileNumbers.indexOf(0);
 
+    this.puzzleBoardElement.style.setProperty(
+      "grid-template-columns",
+      `repeat(${this.boardSize}, 1fr)`
+    );
+    this.puzzleBoardElement.style.setProperty(
+      "grid-template-rows",
+      `repeat(${this.boardSize}, 1fr)`
+    );
+
     this.renderBoard();
   }
 
