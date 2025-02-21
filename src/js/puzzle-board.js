@@ -64,4 +64,38 @@ export class PuzzleBoard {
       this.#emptyTileIndex = tileIndex;
     }
   }
+
+  #getAdjacentTilesForEmptySlot() {
+    if (
+      typeof this.#emptyTileIndex !== "number" ||
+      !this.#boardSize ||
+      this.#boardSize < 0
+    ) {
+      return [];
+    }
+
+    const emptyTileRowIndex = Math.floor(
+      this.#emptyTileIndex / this.#boardSize
+    );
+    const emptyTileColumnIndex = this.#emptyTileIndex % this.#boardSize;
+    const possibleMoves = [];
+
+    if (emptyTileRowIndex > 0) {
+      possibleMoves.push(this.#emptyTileIndex - this.#boardSize);
+    }
+
+    if (emptyTileRowIndex < this.#boardSize - 1) {
+      possibleMoves.push(this.#emptyTileIndex + this.#boardSize);
+    }
+
+    if (emptyTileColumnIndex > 0) {
+      possibleMoves.push(this.#emptyTileIndex - 1);
+    }
+
+    if (emptyTileColumnIndex < this.#boardSize - 1) {
+      possibleMoves.push(this.#emptyTileIndex + 1);
+    }
+
+    return possibleMoves;
+  }
 }
