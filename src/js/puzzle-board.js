@@ -50,7 +50,10 @@ export class PuzzleBoard {
         tileElement.classList.add("empty");
       }
 
-      tileElement.addEventListener("click", () => {});
+      if (tile > 0) {
+        tileElement.addEventListener("click", this.#moveTile.bind(this));
+      }
+
       this.#puzzleBoardElement.appendChild(tileElement);
     });
   }
@@ -97,5 +100,17 @@ export class PuzzleBoard {
     }
 
     return possibleMoves;
+  }
+
+  #moveTile(event) {
+    if (event?.target) {
+      const tileIndex = parseInt(event.target?.dataset?.index || "-1");
+      const possibleMoves = this.#getAdjacentTilesForEmptySlot();
+
+      if (possibleMoves?.includes(tileIndex)) {
+        this.#swapTiles(tileIndex);
+        this.#renderBoard();
+      }
+    }
   }
 }
