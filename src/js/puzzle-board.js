@@ -50,6 +50,10 @@ export class PuzzleBoard {
         tileElement.classList.add("empty");
       }
 
+      if (index + 1 === tile) {
+        tileElement.classList.add("done");
+      }
+
       if (tile > 0) {
         tileElement.addEventListener("click", this.#moveTile.bind(this));
       }
