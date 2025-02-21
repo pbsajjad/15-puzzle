@@ -6,7 +6,88 @@
     box-sizing: border-box;
 }
 
+:root {
+    --primary-color: #2e2e2e;
+    --border-color: #424242;
+    --bg-color: #1f1f1f;
+    --txt-color: #fff;
+    --title-color: #f8f9fa;
+    --description-color: #adb5bd;
+    --tile-color: #f5f5f5;
+    --tile-color-hover: #242424;
+    --tile-color-success: #2f9e44;
+
+    --font-size: 16px;
+
+    --border-radius: 5px;
+
+    --tile-size: 100px;
+}
+
+html {
+    font-size: var(--font-size);
+}
+
 body {
-    background-color: #eee;
-    font-family: Arial, sans-serif;
+    height: 100vh;
+    font-family: cursive, Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--txt-color);
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.header {
+    text-align: center;
+    margin: 20px auto 40px;
+}
+
+.header .title {
+    margin-bottom: 15px;
+    color: var(--title-color);
+}
+
+.header .description {
+    color: var(--description-color);
+}
+
+.puzzle-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 5px;
+}
+
+.puzzle-grid .tile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--tile-size);
+    height: var(--tile-size);
+    background-color: var(--primary-color);
+    border: 1px solid var(--border-color);
+    color: var(--tile-color);
+    font-size: 2.4rem;
+    font-weight: 700;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.puzzle-grid .tile:hover {
+    background-color: var(--tile-color-hover);
+}
+
+.puzzle-grid .tile.empty {
+    background-color: transparent;
+    cursor: default;
+}
+
+.puzzle-grid .tile.done {
+    background-color: var(--tile-color-success);
 }
