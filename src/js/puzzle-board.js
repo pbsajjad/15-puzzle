@@ -54,4 +54,14 @@ export class PuzzleBoard {
       this.#puzzleBoardElement.appendChild(tileElement);
     });
   }
+
+  #swapTiles(tileIndex) {
+    if (this.#tiles?.[tileIndex] && typeof this.#emptyTileIndex === "number") {
+      [this.#tiles[tileIndex], this.#tiles[this.#emptyTileIndex]] = [
+        this.#tiles[this.#emptyTileIndex],
+        this.#tiles[tileIndex],
+      ];
+      this.#emptyTileIndex = tileIndex;
+    }
+  }
 }
