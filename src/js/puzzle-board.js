@@ -1,52 +1,57 @@
 import { shuffleNumbers } from "./utils.js";
 
 export class PuzzleBoard {
+  #boardSize;
+  #puzzleBoardElement;
+  #tiles;
+  #emptyTileIndex;
+
   constructor(boardSize, puzzleBoardElement) {
-    this.boardSize = boardSize;
-    this.puzzleBoardElement = puzzleBoardElement;
-    this.tileNumbers = [];
-    this.emptyTileIndex;
+    this.#boardSize = boardSize;
+    this.#puzzleBoardElement = puzzleBoardElement;
+    this.#tiles = [];
+    this.#emptyTileIndex;
   }
 
   init() {
-    this.tileNumbers = Array.from(
-      { length: this.boardSize * this.boardSize - 1 },
+    this.#tiles = Array.from(
+      { length: this.#boardSize * this.#boardSize - 1 },
       (_, i) => i + 1
     );
-    this.tileNumbers.push(0);
-    this.tileNumbers = shuffleNumbers(this.tileNumbers);
-    this.emptyTileIndex = this.tileNumbers.indexOf(0);
+    this.#tiles.push(0);
+    this.#tiles = shuffleNumbers(this.#tiles);
+    this.#emptyTileIndex = this.#tiles.indexOf(0);
 
-    this.puzzleBoardElement.style.setProperty(
+    this.#puzzleBoardElement.style.setProperty(
       "grid-template-columns",
-      `repeat(${this.boardSize}, 1fr)`
+      `repeat(${this.#boardSize}, 1fr)`
     );
-    this.puzzleBoardElement.style.setProperty(
+    this.#puzzleBoardElement.style.setProperty(
       "grid-template-rows",
-      `repeat(${this.boardSize}, 1fr)`
+      `repeat(${this.#boardSize}, 1fr)`
     );
 
-    this.renderBoard();
+    this.#renderBoard();
   }
 
-  renderBoard() {
-    this.puzzleBoardElement.innerHTML = "";
+  #renderBoard() {
+    this.#puzzleBoardElement.innerHTML = "";
 
-    this.tileNumbers.forEach((tileNumber, index) => {
+    this.#tiles.forEach((tile, index) => {
       const tileElement = document.createElement("div");
 
       tileElement.classList.add("tile");
-      tileElement.textContent = tileNumber === 0 ? "" : tileNumber;
+      tileElement.textContent = tile === 0 ? "" : tile;
       tileElement.role = "button";
       tileElement.tabIndex = 0;
-      tileElement.dataset.id = index;
+      tileElement.dataset.index = index;
 
-      if (tileNumber === 0) {
+      if (tile === 0) {
         tileElement.classList.add("empty");
       }
 
       tileElement.addEventListener("click", () => {});
-      this.puzzleBoardElement.appendChild(tileElement);
+      this.#puzzleBoardElement.appendChild(tileElement);
     });
   }
 }
