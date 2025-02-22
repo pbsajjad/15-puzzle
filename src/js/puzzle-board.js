@@ -5,17 +5,27 @@ export class PuzzleBoard {
   #numberOfCols;
   #tileSizeInPx;
   #puzzleBoardElement;
+  #puzzleBoardMessageElement;
   #tiles;
   #emptyTileIndex;
+  #totalMoves;
   static TILE_FONT_RATIO = 2.6;
 
-  constructor(numberOfRows, numberOfCols, tileSizeInPx, puzzleBoardElement) {
+  constructor(
+    numberOfRows,
+    numberOfCols,
+    tileSizeInPx,
+    puzzleBoardElement,
+    puzzleBoardMessageElement
+  ) {
     this.#numberOfRows = numberOfRows || 4;
     this.#numberOfCols = numberOfCols || 4;
     this.#tileSizeInPx = tileSizeInPx || 100;
     this.#puzzleBoardElement = puzzleBoardElement;
+    this.#puzzleBoardMessageElement = puzzleBoardMessageElement;
     this.#tiles = [];
     this.#emptyTileIndex;
+    this.#totalMoves = 0;
   }
 
   init() {
@@ -126,6 +136,7 @@ export class PuzzleBoard {
 
       if (possibleMoves?.includes(tileIndex)) {
         this.#swapTiles(tileIndex);
+        this.#increaseTotalMoves();
         this.#renderBoard();
 
         if (this.#hasWon()) {
@@ -146,5 +157,20 @@ export class PuzzleBoard {
     }
 
     return true;
+  }
+
+  #increaseTotalMoves() {
+    this.#totalMoves++;
+    this.#renderTotalMovesMessage();
+  }
+
+  #renderTotalMovesMessage() {
+    const pElement = document.createElement("p");
+
+    pElement.textContent = `You've moved ${this.#totalMoves} ${
+      this.#totalMoves > 1 ? "squares" : "square"
+    }!`;
+    this.#puzzleBoardMessageElement.innerHTML = "";
+    this.#puzzleBoardMessageElement.appendChild(pElement);
   }
 }

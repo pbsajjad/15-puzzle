@@ -44,7 +44,7 @@ body {
 
 .header {
     text-align: center;
-    margin: 20px auto 40px;
+    margin: 20px auto 30px;
 }
 
 .header .title {
@@ -54,6 +54,18 @@ body {
 
 .header .description {
     color: var(--description-color);
+}
+
+.message-box {
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    border-radius: var(--border-radius);
+    margin-bottom: 20px;
+}
+
+.message-box.success {
+    border-color: var(--tile-color-success);
+    color: var(--tile-color-success);
 }
 
 .puzzle-grid {
