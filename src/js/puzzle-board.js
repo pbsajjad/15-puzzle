@@ -1,13 +1,15 @@
 import { shuffleNumbers } from "./utils.js";
 
 export class PuzzleBoard {
-  #boardSize;
+  #numberOfRows;
+  #numberOfCols;
   #puzzleBoardElement;
   #tiles;
   #emptyTileIndex;
 
-  constructor(boardSize, puzzleBoardElement) {
-    this.#boardSize = boardSize || 4;
+  constructor(numberOfRows, numberOfCols, puzzleBoardElement) {
+    this.#numberOfRows = numberOfRows || 4;
+    this.#numberOfCols = numberOfCols || 4;
     this.#puzzleBoardElement = puzzleBoardElement;
     this.#tiles = [];
     this.#emptyTileIndex;
@@ -15,7 +17,7 @@ export class PuzzleBoard {
 
   init() {
     this.#tiles = Array.from(
-      { length: this.#boardSize * this.#boardSize - 1 },
+      { length: this.#numberOfRows * this.#numberOfCols - 1 },
       (_, i) => i + 1
     );
     this.#tiles.push(0);
@@ -23,12 +25,12 @@ export class PuzzleBoard {
     this.#emptyTileIndex = this.#tiles.indexOf(0);
 
     this.#puzzleBoardElement.style.setProperty(
-      "grid-template-columns",
-      `repeat(${this.#boardSize}, 1fr)`
+      "grid-template-rows",
+      `repeat(${this.#numberOfRows}, 1fr)`
     );
     this.#puzzleBoardElement.style.setProperty(
-      "grid-template-rows",
-      `repeat(${this.#boardSize}, 1fr)`
+      "grid-template-columns",
+      `repeat(${this.#numberOfCols}, 1fr)`
     );
 
     this.#renderBoard();
@@ -75,31 +77,33 @@ export class PuzzleBoard {
   #getAdjacentTilesForEmptySlot() {
     if (
       typeof this.#emptyTileIndex !== "number" ||
-      !this.#boardSize ||
-      this.#boardSize < 0
+      !this.#numberOfRows ||
+      this.#numberOfRows < 0 ||
+      !this.#numberOfCols ||
+      this.#numberOfCols < 0
     ) {
       return [];
     }
 
     const emptyTileRowIndex = Math.floor(
-      this.#emptyTileIndex / this.#boardSize
+      this.#emptyTileIndex / this.#numberOfCols
     );
-    const emptyTileColumnIndex = this.#emptyTileIndex % this.#boardSize;
+    const emptyTileColumnIndex = this.#emptyTileIndex % this.#numberOfCols;
     const possibleMoves = [];
 
     if (emptyTileRowIndex > 0) {
-      possibleMoves.push(this.#emptyTileIndex - this.#boardSize);
+      possibleMoves.push(this.#emptyTileIndex - this.#numberOfCols);
     }
 
-    if (emptyTileRowIndex < this.#boardSize - 1) {
-      possibleMoves.push(this.#emptyTileIndex + this.#boardSize);
+    if (emptyTileRowIndex < this.#numberOfRows - 1) {
+      possibleMoves.push(this.#emptyTileIndex + this.#numberOfCols);
     }
 
     if (emptyTileColumnIndex > 0) {
       possibleMoves.push(this.#emptyTileIndex - 1);
     }
 
-    if (emptyTileColumnIndex < this.#boardSize - 1) {
+    if (emptyTileColumnIndex < this.#numberOfCols - 1) {
       possibleMoves.push(this.#emptyTileIndex + 1);
     }
 
