@@ -140,9 +140,7 @@ export class PuzzleBoard {
         this.#renderBoard();
 
         if (this.#hasWon()) {
-          setTimeout(() => {
-            alert("You won!");
-          }, 300);
+          this.#renderWonMessage();
         }
       }
     }
@@ -171,6 +169,17 @@ export class PuzzleBoard {
       this.#totalMoves > 1 ? "squares" : "square"
     }!`;
     this.#puzzleBoardMessageElement.innerHTML = "";
+    this.#puzzleBoardMessageElement.appendChild(pElement);
+  }
+
+  #renderWonMessage() {
+    const pElement = document.createElement("p");
+
+    pElement.textContent = `Congrats! You completed the game with ${
+      this.#totalMoves
+    } ${this.#totalMoves > 1 ? "moves" : "move"}!`;
+    this.#puzzleBoardMessageElement.innerHTML = "";
+    this.#puzzleBoardMessageElement.classList.add("success");
     this.#puzzleBoardMessageElement.appendChild(pElement);
   }
 }
