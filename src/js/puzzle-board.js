@@ -27,6 +27,8 @@ export class PuzzleBoard {
     this.#tiles = [];
     this.#emptyTileIndex;
     this.#totalMoves = 0;
+
+    this.init();
   }
 
   init() {
@@ -37,6 +39,7 @@ export class PuzzleBoard {
     this.#tiles.push(0);
     this.#tiles = shuffleNumbers(this.#tiles);
     this.#emptyTileIndex = this.#tiles.indexOf(0);
+  }
 
   render() {
     this.#puzzleBoardElement.innerHTML = "";
@@ -48,12 +51,6 @@ export class PuzzleBoard {
       "grid-template-columns",
       `repeat(${this.#numberOfCols}, 1fr)`
     );
-
-    this.#renderBoard();
-  }
-
-  #renderBoard() {
-    this.#puzzleBoardElement.innerHTML = "";
     this.#puzzleBoardElement.style.setProperty(
       "width",
       `${
