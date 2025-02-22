@@ -88,6 +88,18 @@ body {
     border-bottom-right-radius: var(--border-radius);
 }
 
+.puzzle-board-header .actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 1px 10px;
+}
+
+.puzzle-board-header .actions .reset {
+    user-select: none;
+    cursor: pointer;
+}
+
 .puzzle-grid {
     width: 400px;
     display: grid;

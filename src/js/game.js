@@ -31,6 +31,7 @@ export class Game {
         boardTemplateElement.querySelector(".message-box");
       const puzzleGridElement =
         boardTemplateElement.querySelector(".puzzle-grid");
+      const resetElement = boardTemplateElement.querySelector(".reset");
 
       if (
         puzzleBoardElement &&
@@ -55,6 +56,12 @@ export class Game {
 
         this.#puzzleBoards.set(id, puzzleBoard);
         puzzleBoard.render();
+
+        if (resetElement) {
+          resetElement.addEventListener("click", (e) => {
+            puzzleBoard.reset();
+          });
+        }
 
         return id;
       }
