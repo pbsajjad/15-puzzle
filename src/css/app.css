@@ -67,13 +67,11 @@ body {
     color: var(--tile-color-success);
 }
 
-#puzzle-boards {
-    margin-bottom: 30px;
-}
-
 .puzzle-board {
+    min-height: 400px;
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
+    margin-bottom: 30px;
 }
 
 .puzzle-board-header {
