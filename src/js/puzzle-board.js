@@ -38,6 +38,8 @@ export class PuzzleBoard {
     this.#tiles = shuffleNumbers(this.#tiles);
     this.#emptyTileIndex = this.#tiles.indexOf(0);
 
+  render() {
+    this.#puzzleBoardElement.innerHTML = "";
     this.#puzzleBoardElement.style.setProperty(
       "grid-template-rows",
       `repeat(${this.#numberOfRows}, 1fr)`
@@ -89,6 +91,13 @@ export class PuzzleBoard {
 
       this.#puzzleBoardElement.appendChild(tileElement);
     });
+  }
+
+  reset() {
+    this.#totalMoves = 0;
+    this.init();
+    this.render();
+    this.#renderTotalMovesMessage();
   }
 
   #swapTiles(tileIndex) {
@@ -145,7 +154,7 @@ export class PuzzleBoard {
       if (possibleMoves?.includes(tileIndex)) {
         this.#swapTiles(tileIndex);
         this.#increaseTotalMoves();
-        this.#renderBoard();
+        this.render();
 
         if (this.#hasWon()) {
           this.#renderWonMessage();
