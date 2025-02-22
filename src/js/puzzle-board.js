@@ -3,13 +3,16 @@ import { shuffleNumbers } from "./utils.js";
 export class PuzzleBoard {
   #numberOfRows;
   #numberOfCols;
+  #tileSizeInPx;
   #puzzleBoardElement;
   #tiles;
   #emptyTileIndex;
+  static TILE_FONT_RATIO = 2.6;
 
-  constructor(numberOfRows, numberOfCols, puzzleBoardElement) {
+  constructor(numberOfRows, numberOfCols, tileSizeInPx, puzzleBoardElement) {
     this.#numberOfRows = numberOfRows || 4;
     this.#numberOfCols = numberOfCols || 4;
+    this.#tileSizeInPx = tileSizeInPx || 100;
     this.#puzzleBoardElement = puzzleBoardElement;
     this.#tiles = [];
     this.#emptyTileIndex;
@@ -44,6 +47,12 @@ export class PuzzleBoard {
 
       tileElement.classList.add("tile");
       tileElement.textContent = tile === 0 ? "" : tile;
+      tileElement.style.setProperty("width", `${this.#tileSizeInPx}px`);
+      tileElement.style.setProperty("height", `${this.#tileSizeInPx}px`);
+      tileElement.style.setProperty(
+        "font-size",
+        `${this.#tileSizeInPx / PuzzleBoard.TILE_FONT_RATIO}px`
+      );
       tileElement.role = "button";
       tileElement.tabIndex = 0;
       tileElement.dataset.index = index;
