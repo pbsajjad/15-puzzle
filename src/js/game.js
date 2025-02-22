@@ -32,6 +32,7 @@ export class Game {
       const puzzleGridElement =
         boardTemplateElement.querySelector(".puzzle-grid");
       const resetElement = boardTemplateElement.querySelector(".reset");
+      const removeElement = boardTemplateElement.querySelector(".remove");
 
       if (
         puzzleBoardElement &&
@@ -60,6 +61,12 @@ export class Game {
         if (resetElement) {
           resetElement.addEventListener("click", (e) => {
             puzzleBoard.reset();
+          });
+        }
+
+        if (removeElement) {
+          removeElement.addEventListener("click", (e) => {
+            this.removePuzzleBoard(id);
           });
         }
 

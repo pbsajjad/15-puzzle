@@ -95,7 +95,8 @@ body {
     padding: 1px 10px;
 }
 
-.puzzle-board-header .actions .reset {
+.puzzle-board-header .actions .reset,
+.puzzle-board-header .actions .remove {
     user-select: none;
     cursor: pointer;
 }
