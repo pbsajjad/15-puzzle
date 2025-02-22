@@ -10,13 +10,24 @@
   <body>
     <div class="container">
       <div class="header">
-        <h1 class="title">15 Puzzle</h1>
-        <p class="description">Order squares numerically by moving them.</p>
+        <div class="heading">
+          <h1 class="title">15 Puzzle</h1>
+          <p class="description">Order squares numerically by moving them.</p>
+        </div>
       </div>
-      <div class="message-box" id="puzzle-board-message">
-        <p>Start moving...</p>
+      <div id="puzzle-boards">
+        <div class="puzzle-board">
+          <div class="puzzle-board-header">
+            <div class="heading">
+              <h3 class="title">Board #1</h3>
+            </div>
+          </div>
+          <div class="message-box">
+            <p>Start moving...</p>
+          </div>
+          <div class="puzzle-grid"></div>
+        </div>
       </div>
-      <div class="puzzle-grid" id="puzzle-board"></div>
     </div>
     <script src="/src/js/app.js" type="module"></script>
   </body>

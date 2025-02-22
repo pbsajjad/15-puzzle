@@ -1,9 +1,8 @@
 import { PuzzleBoard } from "./puzzle-board.js";
 
-const puzzleBoardElement = document.getElementById("puzzle-board");
-const puzzleBoardMessageElement = document.getElementById(
-  "puzzle-board-message"
-);
+const puzzleBoardElement = document.getElementsByClassName("puzzle-grid")[0];
+const puzzleBoardMessageElement =
+  document.getElementsByClassName("message-box")[0];
 const NUMBER_OF_ROWS = 3;
 const NUMBER_OF_COLS = 3;
 const TILE_SIZE_IN_PX = 100;

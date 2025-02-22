@@ -36,31 +36,30 @@ body {
 }
 
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    padding: 0 15px 50px;
 }
 
 .header {
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin: 20px auto 30px;
 }
 
-.header .title {
-    margin-bottom: 15px;
+.heading .title {
+    margin-bottom: 5px;
     color: var(--title-color);
 }
 
-.header .description {
+.heading .description {
+    font-size: 0.8rem;
     color: var(--description-color);
 }
 
 .message-box {
-    border: 1px solid var(--border-color);
     padding: 10px;
-    border-radius: var(--border-radius);
-    margin-bottom: 20px;
+    font-size: 0.9rem;
+    text-align: center;
 }
 
 .message-box.success {
@@ -68,11 +67,37 @@ body {
     color: var(--tile-color-success);
 }
 
+#puzzle-boards {
+    margin-bottom: 30px;
+}
+
+.puzzle-board {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+}
+
+.puzzle-board-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.puzzle-board-header .heading .title {
+    font-size: 1.05rem;
+    color: var(--title-color);
+    background-color: var(--primary-color);
+    padding: 5px 15px 6px;
+    border-bottom-right-radius: var(--border-radius);
+}
+
 .puzzle-grid {
+    width: 400px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
     gap: 5px;
+    margin: 0 auto;
+    padding: 20px 10px 50px;
 }
 
 .puzzle-grid .tile {
