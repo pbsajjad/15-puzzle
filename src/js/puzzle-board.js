@@ -127,7 +127,24 @@ export class PuzzleBoard {
       if (possibleMoves?.includes(tileIndex)) {
         this.#swapTiles(tileIndex);
         this.#renderBoard();
+
+        if (this.#hasWon()) {
+          setTimeout(() => {
+            alert("You won!");
+          }, 300);
+        }
       }
     }
+  }
+
+  #hasWon() {
+    for (let i = 0; i < this.#tiles.length; i++) {
+      // Skip empty tile checking in the first condition
+      if (this.#tiles?.[i] > 0 && this.#tiles?.[i] !== i + 1) {
+        return false;
+      }
+    }
+
+    return true;
   }
 }
