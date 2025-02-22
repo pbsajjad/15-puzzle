@@ -10,6 +10,7 @@ export class PuzzleBoard {
   #emptyTileIndex;
   #totalMoves;
   static TILE_FONT_RATIO = 2.6;
+  static TILES_GAP_IN_PX = 5;
 
   constructor(
     numberOfRows,
@@ -51,6 +52,13 @@ export class PuzzleBoard {
 
   #renderBoard() {
     this.#puzzleBoardElement.innerHTML = "";
+    this.#puzzleBoardElement.style.setProperty(
+      "width",
+      `${
+        this.#numberOfCols * this.#tileSizeInPx +
+        (this.#numberOfCols - 1) * PuzzleBoard.TILES_GAP_IN_PX
+      }px`
+    );
 
     this.#tiles.forEach((tile, index) => {
       const tileElement = document.createElement("div");
