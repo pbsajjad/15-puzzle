@@ -98,7 +98,11 @@ export class PuzzleBoard {
   }
 
   #swapTiles(tileIndex) {
-    if (this.#tiles?.[tileIndex] && typeof this.#emptyTileIndex === "number") {
+    if (
+      this.#tiles?.[tileIndex] &&
+      typeof this.#emptyTileIndex === "number" &&
+      !this.#hasWon()
+    ) {
       [this.#tiles[tileIndex], this.#tiles[this.#emptyTileIndex]] = [
         this.#tiles[this.#emptyTileIndex],
         this.#tiles[tileIndex],
