@@ -108,6 +108,8 @@ export class PuzzleBoard {
         this.#tiles[tileIndex],
       ];
       this.#emptyTileIndex = tileIndex;
+
+      this.#increaseTotalMoves();
     }
   }
 
@@ -154,7 +156,6 @@ export class PuzzleBoard {
 
       if (possibleMoves?.includes(tileIndex)) {
         this.#swapTiles(tileIndex);
-        this.#increaseTotalMoves();
         this.render();
 
         if (this.#hasWon()) {
