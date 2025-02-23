@@ -45,14 +45,14 @@ export class PuzzleBoard {
     this.#puzzleBoardElement.innerHTML = "";
     this.#puzzleBoardElement.style.setProperty(
       "grid-template-rows",
-      `repeat(${this.#numberOfRows}, 1fr)`
+      `repeat(${this.#numberOfRows}, auto)`
     );
     this.#puzzleBoardElement.style.setProperty(
       "grid-template-columns",
-      `repeat(${this.#numberOfCols}, 1fr)`
+      `repeat(${this.#numberOfCols}, minmax(0, auto))`
     );
     this.#puzzleBoardElement.style.setProperty(
-      "width",
+      "max-width",
       `${
         this.#numberOfCols * this.#tileSizeInPx +
         (this.#numberOfCols - 1) * PuzzleBoard.TILES_GAP_IN_PX
@@ -64,8 +64,8 @@ export class PuzzleBoard {
 
       tileElement.classList.add("tile");
       tileElement.textContent = tile === 0 ? "" : tile;
-      tileElement.style.setProperty("width", `${this.#tileSizeInPx}px`);
-      tileElement.style.setProperty("height", `${this.#tileSizeInPx}px`);
+      tileElement.style.setProperty("max-width", `${this.#tileSizeInPx}px`);
+      tileElement.style.setProperty("max-height", `${this.#tileSizeInPx}px`);
       tileElement.style.setProperty(
         "font-size",
         `${this.#tileSizeInPx / PuzzleBoard.TILE_FONT_RATIO}px`
@@ -92,6 +92,7 @@ export class PuzzleBoard {
 
   reset() {
     this.#totalMoves = 0;
+
     this.init();
     this.render();
     this.#renderResetMessage();
