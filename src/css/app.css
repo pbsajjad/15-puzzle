@@ -75,7 +75,7 @@ body {
 }
 
 .container {
-    padding: 0 15px 50px;
+    padding: 0 15px 20px;
 }
 
 .header {
@@ -265,6 +265,15 @@ body {
 }
 
 @media screen and (max-width: 425px) {
+    .header {
+        display: block;
+        text-align: center;
+    }
+
+    .header .actions {
+        margin-top: 15px;
+    }
+
     #new-board-form .inputs {
         display: block;
     }
