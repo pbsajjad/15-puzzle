@@ -113,10 +113,18 @@ body {
     gap: 30px;
 }
 
-#new-board-form .input-wrapper,
-#new-board-form .action-wrapper {
+#new-board-form .input-wrapper {
     max-width: 150px;
     width: 100%;
+}
+
+#new-board-form .actions-wrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#new-board-form .actions-wrapper .button {
+    width: 150px;
 }
 
 #new-board-form label {
@@ -233,4 +241,28 @@ body {
 
 .puzzle-grid .tile.done {
     background-color: var(--tile-color-success);
+}
+
+@media screen and (max-width: 650px) {
+    #new-board-form {
+        display: block;
+    }
+
+    #new-board-form .input {
+        margin-bottom: 15px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    #new-board-form .inputs {
+        display: block;
+    }
+
+    #new-board-form .input-wrapper {
+        max-width: 100%;
+    }
+
+    #new-board-form .actions-wrapper {
+        margin-top: 15px;
+    }
 }
