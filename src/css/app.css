@@ -15,7 +15,7 @@ input::-webkit-inner-spin-button {
 :root {
     --primary-color: #2e2e2e;
     --border-color: #424242;
-    --border-color-light: #828282;
+    --border-color-light: #696969;
     --bg-color: #1f1f1f;
     --txt-color: #fff;
     --title-color: #f8f9fa;
@@ -40,7 +40,6 @@ html {
 }
 
 body {
-    height: 100vh;
     font-family: cursive, Arial, sans-serif;
     background-color: var(--bg-color);
     color: var(--txt-color);
@@ -96,6 +95,17 @@ body {
     color: var(--description-color);
 }
 
+.empty-boards-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    border: 1px dashed var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 15px;
+    text-align: center;
+}
+
 #new-board-form {
     display: flex;
     justify-content: space-between;
@@ -104,7 +114,7 @@ body {
     background-color: var(--primary-color);
     border-radius: var(--border-radius);
     margin-bottom: 30px;
-    padding: 15px 15px;
+    padding: 15px;
 }
 
 #new-board-form .inputs {

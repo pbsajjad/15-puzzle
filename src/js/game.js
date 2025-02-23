@@ -106,12 +106,25 @@ export class Game {
     if (puzzleBoardElement) {
       puzzleBoardElement.remove();
     }
+
+    if (this.#puzzleBoards.size === 0) {
+      const templateElement = document.getElementById("empty-boards-template");
+
+      if (templateElement) {
+        const messageTemplateElement = templateElement.content.cloneNode(true);
+
+        this.#puzzleBoardsElement.appendChild(messageTemplateElement);
+      }
+    }
   }
 
   #handleAddNewPuzzle() {
     const numberOfRowsInputElement = document.getElementById("number-of-rows");
     const numberOfColsInputElement = document.getElementById("number-of-cols");
     const tileSizeInputElement = document.getElementById("tile-size");
+    const emptyBoardsMessageElement = this.#puzzleBoardsElement.querySelector(
+      ".empty-boards-message"
+    );
 
     if (
       numberOfRowsInputElement &&
@@ -127,6 +140,10 @@ export class Game {
       tileSizeInputElement.classList.remove("error");
 
       if (numberOfRows && numberOfCols && tileSizeInPx) {
+        if (emptyBoardsMessageElement) {
+          this.#puzzleBoardsElement.innerHTML = "";
+        }
+
         const newPuzzleBoardId = this.addPuzzleBoard(
           numberOfRows,
           numberOfCols,
