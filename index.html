@@ -15,6 +15,27 @@
           <p class="description">Order squares numerically by moving them.</p>
         </div>
       </div>
+      <form id="new-board-form">
+        <div class="inputs">
+          <div class="input-wrapper">
+            <label for="number-of-rows">Rows:</label>
+            <input type="number" min="1" class="input" id="number-of-rows" />
+          </div>
+          <div class="input-wrapper">
+            <label for="number-of-cols">Columns:</label>
+            <input type="number" min="1" class="input" id="number-of-cols" />
+          </div>
+          <div class="input-wrapper">
+            <label for="tile-size">Tile Size (px):</label>
+            <input type="number" min="1" class="input" id="tile-size" />
+          </div>
+        </div>
+        <div class="action-wrapper">
+          <button class="button primary" id="add-button" tabindex="0">
+            Add New Board
+          </button>
+        </div>
+      </form>
       <div id="puzzle-boards"></div>
       <template id="puzzle-board-template">
         <div class="puzzle-board">

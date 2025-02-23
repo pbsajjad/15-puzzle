@@ -6,9 +6,16 @@
     box-sizing: border-box;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 :root {
     --primary-color: #2e2e2e;
     --border-color: #424242;
+    --border-color-light: #828282;
     --bg-color: #1f1f1f;
     --txt-color: #fff;
     --title-color: #f8f9fa;
@@ -16,12 +23,16 @@
     --tile-color: #f5f5f5;
     --tile-color-hover: #242424;
     --tile-color-success: #2f9e44;
+    --danger-color: #f03e3e;
+    --btn-primary-color: #405cf5;
 
     --font-size: 16px;
 
     --border-radius: 5px;
 
     --tile-size: 100px;
+    --input-height: 40px;
+    --button-height: 40px;
 }
 
 html {
@@ -33,6 +44,35 @@ body {
     font-family: cursive, Arial, sans-serif;
     background-color: var(--bg-color);
     color: var(--txt-color);
+}
+
+.button {
+    background-color: var(--btn-primary-color);
+    color: #fff;
+    box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .1) 0 2px 5px 0, rgba(0, 0, 0, .07) 0 1px 1px 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    width: 100%;
+    height: var(--button-height);
+    border-radius: 6px;
+    border-width: 0;
+    line-height: 1.15;
+    outline: none;
+    overflow: hidden;
+    padding: 0 25px;
+    position: relative;
+    text-align: center;
+    text-transform: none;
+    transition: all .2s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    appearance: button;
+    backface-visibility: hidden;
+}
+  
+.button.primary {
+    background-color: var(--btn-primary-color);
 }
 
 .container {
@@ -56,6 +96,59 @@ body {
     color: var(--description-color);
 }
 
+#new-board-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 30px;
+    background-color: var(--primary-color);
+    border-radius: var(--border-radius);
+    margin-bottom: 30px;
+    padding: 15px 15px;
+}
+
+#new-board-form .inputs {
+    display: flex;
+    align-items: flex-end;
+    gap: 30px;
+}
+
+#new-board-form .input-wrapper,
+#new-board-form .action-wrapper {
+    max-width: 150px;
+    width: 100%;
+}
+
+#new-board-form label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+#new-board-form .input {
+    width: 100%;
+    height: var(--input-height);
+    border-radius: var(--border-radius);
+    background: transparent;
+    color: var(--txt-color);
+    box-shadow: none;
+    outline: none;
+    border: 1px solid var(--border-color);
+    padding: 7px 8px;
+    transition: all 0.15s;
+}
+
+#new-board-form .input:focus {
+    outline: none;
+    border-color: var(--border-color-light);
+}
+
+#new-board-form .input.error,
+#new-board-form .input.error:focus {
+    outline: unset;
+    border-color: var(--danger-color);
+}
+
 .message-box {
     padding: 10px;
     font-size: 0.9rem;
@@ -71,7 +164,7 @@ body {
     min-height: 400px;
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .puzzle-board-header {
@@ -85,6 +178,7 @@ body {
     color: var(--title-color);
     background-color: var(--primary-color);
     padding: 5px 15px 6px;
+    border-top-left-radius: var(--border-radius);
     border-bottom-right-radius: var(--border-radius);
 }
 

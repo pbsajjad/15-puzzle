@@ -14,8 +14,23 @@ export class Game {
   }
 
   init(numberOfRows = 4, numberOfCols = 4, tileSizeInPx = 100) {
+    const newBoardFormElement = document.getElementById("new-board-form");
+    const addButtonElement = document.getElementById("add-button");
+
     this.#puzzleBoardsElement.innerHTML = "";
     this.addPuzzleBoard(numberOfRows, numberOfCols, tileSizeInPx);
+
+    newBoardFormElement.addEventListener("submit", (event) => {
+      event.preventDefault();
+      this.#handleAddNewPuzzle.bind(this);
+    });
+
+    if (addButtonElement) {
+      addButtonElement.addEventListener(
+        "click",
+        this.#handleAddNewPuzzle.bind(this)
+      );
+    }
   }
 
   addPuzzleBoard(numberOfRows, numberOfCols, tileSizeInPx) {
@@ -88,6 +103,52 @@ export class Game {
 
     if (puzzleBoardElement) {
       puzzleBoardElement.remove();
+    }
+  }
+
+  #handleAddNewPuzzle() {
+    const numberOfRowsInputElement = document.getElementById("number-of-rows");
+    const numberOfColsInputElement = document.getElementById("number-of-cols");
+    const tileSizeInputElement = document.getElementById("tile-size");
+
+    if (
+      numberOfRowsInputElement &&
+      numberOfColsInputElement &&
+      tileSizeInputElement
+    ) {
+      const numberOfRows = parseInt(numberOfRowsInputElement.value);
+      const numberOfCols = parseInt(numberOfColsInputElement.value);
+      const tileSizeInPx = parseInt(tileSizeInputElement.value);
+
+      numberOfRowsInputElement.classList.remove("error");
+      numberOfColsInputElement.classList.remove("error");
+      tileSizeInputElement.classList.remove("error");
+
+      if (numberOfRows && numberOfCols && tileSizeInPx) {
+        const newPuzzleBoardId = this.addPuzzleBoard(
+          numberOfRows,
+          numberOfCols,
+          tileSizeInPx
+        );
+
+        if (newPuzzleBoardId) {
+          numberOfRowsInputElement.value = "";
+          numberOfColsInputElement.value = "";
+          tileSizeInputElement.value = "";
+        }
+      } else {
+        if (!numberOfRows) {
+          numberOfRowsInputElement.classList.add("error");
+        }
+
+        if (!numberOfCols) {
+          numberOfColsInputElement.classList.add("error");
+        }
+
+        if (!tileSizeInPx) {
+          tileSizeInputElement.classList.add("error");
+        }
+      }
     }
   }
 }
