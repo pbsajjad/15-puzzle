@@ -94,7 +94,7 @@ export class PuzzleBoard {
     this.#totalMoves = 0;
     this.init();
     this.render();
-    this.#renderTotalMovesMessage();
+    this.#renderResetMessage();
   }
 
   #swapTiles(tileIndex) {
@@ -182,23 +182,45 @@ export class PuzzleBoard {
   }
 
   #renderTotalMovesMessage() {
-    const pElement = document.createElement("p");
-
-    pElement.textContent = `You've moved ${this.#totalMoves} ${
+    const content = `You've moved ${this.#totalMoves} ${
       this.#totalMoves > 1 ? "squares" : "square"
     }!`;
-    this.#puzzleBoardMessageElement.innerHTML = "";
-    this.#puzzleBoardMessageElement.appendChild(pElement);
+
+    this.#renderMessage(content);
   }
 
   #renderWonMessage() {
-    const pElement = document.createElement("p");
-
-    pElement.textContent = `Congrats! You completed the game with ${
+    const content = `Congrats! You completed the game with ${
       this.#totalMoves
     } ${this.#totalMoves > 1 ? "moves" : "move"}!`;
-    this.#puzzleBoardMessageElement.innerHTML = "";
-    this.#puzzleBoardMessageElement.classList.add("success");
-    this.#puzzleBoardMessageElement.appendChild(pElement);
+
+    this.#renderMessage(content, "success");
+  }
+
+  #renderResetMessage() {
+    const content = "Start moving...";
+
+    this.#renderMessage(content);
+  }
+
+  #renderMessage(content, type) {
+    if (content) {
+      const pElement = document.createElement("p");
+
+      pElement.textContent = content;
+      this.#puzzleBoardMessageElement.innerHTML = "";
+      this.#puzzleBoardMessageElement.className = "";
+      this.#puzzleBoardMessageElement.classList.add("message-box");
+
+      switch (type) {
+        case "success":
+          this.#puzzleBoardMessageElement.classList.add("success");
+          break;
+        default:
+          break;
+      }
+
+      this.#puzzleBoardMessageElement.appendChild(pElement);
+    }
   }
 }

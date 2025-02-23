@@ -20,10 +20,12 @@ export class Game {
     this.#puzzleBoardsElement.innerHTML = "";
     this.addPuzzleBoard(numberOfRows, numberOfCols, tileSizeInPx);
 
-    newBoardFormElement.addEventListener("submit", (event) => {
-      event.preventDefault();
-      this.#handleAddNewPuzzle.bind(this);
-    });
+    if (newBoardFormElement) {
+      newBoardFormElement.addEventListener("submit", (event) => {
+        event.preventDefault();
+        this.#handleAddNewPuzzle.bind(this);
+      });
+    }
 
     if (addButtonElement) {
       addButtonElement.addEventListener(
