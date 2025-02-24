@@ -146,7 +146,7 @@ export class Game {
       numberOfColsInputElement.classList.remove("error");
       tileSizeInputElement.classList.remove("error");
 
-      if (numberOfRows && numberOfCols && tileSizeInPx) {
+      if (numberOfRows > 1 && numberOfCols > 1 && tileSizeInPx) {
         if (emptyBoardsMessageElement) {
           this.#puzzleBoardsElement.innerHTML = "";
         }
