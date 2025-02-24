@@ -64,9 +64,7 @@ export class PuzzleBoard {
       tileElement.style.setProperty("max-height", `${this.#tileSizeInPx}px`);
       tileElement.style.setProperty(
         "font-size",
-        getTileFontSizeInPx(
-          this.#puzzleBoardElement.clientWidth / this.#numberOfCols
-        )
+        getTileFontSizeInPx(boardMaxSize / this.#numberOfCols)
       );
       tileElement.role = "button";
       tileElement.tabIndex = 0;

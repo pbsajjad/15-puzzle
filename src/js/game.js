@@ -41,8 +41,6 @@ class Game {
         this.#handleAddNewPuzzle.bind(this)
       );
     }
-
-    window.addEventListener("resize", this.#handleChangeTileFontSize);
   }
 
   #addPuzzleBoard(numberOfRows, numberOfCols, tileSizeInPx) {
@@ -182,14 +180,6 @@ class Game {
         }
       }
     }
-  }
-
-  #handleChangeTileFontSize() {
-    document.querySelectorAll(".tile")?.forEach((tile) => {
-      const tileWidth = tile.clientWidth;
-
-      tile.style.setProperty("font-size", getTileFontSizeInPx(tileWidth));
-    });
   }
 }
 
