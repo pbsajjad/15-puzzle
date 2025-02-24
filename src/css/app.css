@@ -143,6 +143,11 @@ body {
     margin-bottom: 5px;
 }
 
+#new-board-form .asterisk {
+    color: var(--danger-color);
+    font-size: 0.8rem;
+}
+
 #new-board-form .input {
     width: 100%;
     height: var(--input-height);
