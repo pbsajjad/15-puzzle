@@ -192,7 +192,7 @@ body {
 .puzzle-board-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
 }
 
 .puzzle-board-header .heading .title {
@@ -290,5 +290,21 @@ body {
 
     #new-board-form .actions-wrapper {
         margin-top: 15px;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .puzzle-board-header {
+        display: block;
+    }
+
+    .puzzle-board-header .heading .title {
+        text-align: center;
+        border-radius: var(--border-radius) var(--border-radius) 0 0;
+    }
+
+    .puzzle-board-header .actions {
+        justify-content: center;
+        margin: 10px auto;
     }
 }
