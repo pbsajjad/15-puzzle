@@ -80,10 +80,6 @@ export class PuzzleBoard {
         tileElement.classList.add("done");
       }
 
-      if (tile > 0) {
-        tileElement.addEventListener("click", this.#moveTile.bind(this));
-      }
-
       fragment.appendChild(tileElement);
     });
 
@@ -99,6 +95,10 @@ export class PuzzleBoard {
     this.#puzzleBoardElement.style.setProperty(
       "max-width",
       `${boardMaxSize}px`
+    );
+    this.#puzzleBoardElement.addEventListener(
+      "click",
+      this.#moveTile.bind(this)
     );
     this.#puzzleBoardElement.appendChild(fragment);
   }
