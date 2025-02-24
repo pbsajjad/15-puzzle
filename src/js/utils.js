@@ -21,3 +21,7 @@ export function shuffleNumbers(numbers) {
 
   return [];
 }
+
+export function getTileFontSizeInPx(tileSizeInPx) {
+  return `${Math.floor(tileSizeInPx || 1) / 3}px`;
+}
