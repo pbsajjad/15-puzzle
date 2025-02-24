@@ -11,6 +11,16 @@ The objective is to arrange the tiles in numerical order by sliding them into th
 - CSS3
 - JavaScript (ES6+)
 
+## Todo
+
+- Add tiles swapping animation
+- Add sound effect on swapping tiles or completed boards
+- Save/load app state in/from local storage
+- Move add new board form to modal
+- Add how to play
+- Show timer for each board
+- Show toast message after adding, deleting, resetting, and shuffling a board
+
 ## Setup and Usage
 
 1. Clone the repository:
