@@ -94,20 +94,38 @@ class Game {
         });
 
         if (resetElement) {
-          resetElement.addEventListener("click", (e) => {
+          resetElement.addEventListener("click", (event) => {
             puzzleBoard.reset();
+          });
+
+          resetElement.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+              puzzleBoard.reset();
+            }
           });
         }
 
         if (removeElement) {
-          removeElement.addEventListener("click", (e) => {
+          removeElement.addEventListener("click", (event) => {
             this.#removePuzzleBoard(id);
+          });
+
+          removeElement.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+              this.#removePuzzleBoard(id);
+            }
           });
         }
 
         if (shuffleElement) {
-          shuffleElement.addEventListener("click", (e) => {
+          shuffleElement.addEventListener("click", (event) => {
             puzzleBoard.shuffle();
+          });
+
+          shuffleElement.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+              puzzleBoard.shuffle();
+            }
           });
         }
 
