@@ -40,7 +40,8 @@ html {
 }
 
 body {
-    font-family: cursive, Arial, sans-serif;
+    font-family: "Quicksand", cursive, Arial;
+    font-display: swap;
     background-color: var(--bg-color);
     color: var(--txt-color);
 }
