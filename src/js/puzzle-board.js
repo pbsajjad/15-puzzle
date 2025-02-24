@@ -1,4 +1,4 @@
-import { shuffleNumbers } from "./utils.js";
+import { getTileFontSizeInPx, shuffleNumbers } from "./utils.js";
 
 export class PuzzleBoard {
   #numberOfRows;
@@ -50,6 +50,10 @@ export class PuzzleBoard {
   }
 
   render() {
+    const boardMaxSize =
+      this.#numberOfCols * this.#tileSizeInPx +
+      (this.#numberOfCols - 1) * PuzzleBoard.TILES_GAP_IN_PX;
+
     this.#puzzleBoardElement.innerHTML = "";
     this.#puzzleBoardElement.style.setProperty(
       "grid-template-rows",
@@ -61,10 +65,7 @@ export class PuzzleBoard {
     );
     this.#puzzleBoardElement.style.setProperty(
       "max-width",
-      `${
-        this.#numberOfCols * this.#tileSizeInPx +
-        (this.#numberOfCols - 1) * PuzzleBoard.TILES_GAP_IN_PX
-      }px`
+      `${boardMaxSize}px`
     );
 
     this.#tiles.forEach((tile, index) => {
@@ -76,7 +77,9 @@ export class PuzzleBoard {
       tileElement.style.setProperty("max-height", `${this.#tileSizeInPx}px`);
       tileElement.style.setProperty(
         "font-size",
-        `${this.#tileSizeInPx / PuzzleBoard.TILE_FONT_RATIO}px`
+        getTileFontSizeInPx(
+          this.#puzzleBoardElement.clientWidth / this.#numberOfCols
+        )
       );
       tileElement.role = "button";
       tileElement.tabIndex = 0;
