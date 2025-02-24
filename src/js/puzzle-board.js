@@ -94,6 +94,10 @@ export class PuzzleBoard {
       "max-width",
       `${boardMaxSize}px`
     );
+    this.#puzzleBoardElement.style.setProperty(
+      "max-height",
+      `${boardMaxSize}px`
+    );
     this.#puzzleBoardElement.addEventListener(
       "click",
       this.#moveTile.bind(this)
