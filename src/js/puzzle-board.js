@@ -84,11 +84,11 @@ export class PuzzleBoard {
     this.#puzzleBoardElement.innerHTML = "";
     this.#puzzleBoardElement.style.setProperty(
       "grid-template-rows",
-      `repeat(${this.#numberOfRows}, auto)`
+      `repeat(${this.#numberOfRows}, minmax(0, 1fr))`
     );
     this.#puzzleBoardElement.style.setProperty(
       "grid-template-columns",
-      `repeat(${this.#numberOfCols}, minmax(0, auto))`
+      `repeat(${this.#numberOfCols}, minmax(0, 1fr))`
     );
     this.#puzzleBoardElement.style.setProperty(
       "max-width",
