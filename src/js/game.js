@@ -50,6 +50,7 @@ export class Game {
         boardTemplateElement.querySelector(".puzzle-grid");
       const resetElement = boardTemplateElement.querySelector(".reset");
       const removeElement = boardTemplateElement.querySelector(".remove");
+      const shuffleElement = boardTemplateElement.querySelector(".shuffle");
 
       if (
         puzzleBoardElement &&
@@ -84,6 +85,12 @@ export class Game {
         if (removeElement) {
           removeElement.addEventListener("click", (e) => {
             this.removePuzzleBoard(id);
+          });
+        }
+
+        if (shuffleElement) {
+          shuffleElement.addEventListener("click", (e) => {
+            puzzleBoard.shuffle();
           });
         }
 

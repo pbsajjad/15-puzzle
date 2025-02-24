@@ -7,7 +7,9 @@ export class PuzzleBoard {
   #puzzleBoardElement;
   #puzzleBoardMessageElement;
   #tiles;
+  #originalTiles;
   #emptyTileIndex;
+  #originalEmptyTileIndex;
   #totalMoves;
   static TILE_FONT_RATIO = 2.6;
   static TILES_GAP_IN_PX = 5;
@@ -25,7 +27,6 @@ export class PuzzleBoard {
     this.#puzzleBoardElement = puzzleBoardElement;
     this.#puzzleBoardMessageElement = puzzleBoardMessageElement;
     this.#tiles = [];
-    this.#emptyTileIndex;
     this.#totalMoves = 0;
 
     this.init();
@@ -39,6 +40,10 @@ export class PuzzleBoard {
     this.#tiles.push(0);
     this.#tiles = shuffleNumbers(this.#tiles);
     this.#emptyTileIndex = this.#tiles.indexOf(0);
+
+    // Keep a copy of tiles and emptyTileIndex for resetting board
+    this.#originalTiles = [...this.#tiles];
+    this.#originalEmptyTileIndex = this.#emptyTileIndex;
   }
 
   render() {
@@ -91,6 +96,15 @@ export class PuzzleBoard {
   }
 
   reset() {
+    this.#totalMoves = 0;
+    this.#tiles = this.#originalTiles;
+    this.#emptyTileIndex = this.#originalEmptyTileIndex;
+
+    this.render();
+    this.#renderResetMessage();
+  }
+
+  shuffle() {
     this.#totalMoves = 0;
 
     this.init();

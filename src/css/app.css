@@ -207,7 +207,8 @@ body {
 }
 
 .puzzle-board-header .actions .reset,
-.puzzle-board-header .actions .remove {
+.puzzle-board-header .actions .remove,
+.puzzle-board-header .actions .shuffle {
     user-select: none;
     cursor: pointer;
 }
