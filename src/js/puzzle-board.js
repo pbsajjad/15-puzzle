@@ -50,23 +50,10 @@ export class PuzzleBoard {
   }
 
   render() {
+    const fragment = document.createDocumentFragment();
     const boardMaxSize =
       this.#numberOfCols * this.#tileSizeInPx +
       (this.#numberOfCols - 1) * PuzzleBoard.TILES_GAP_IN_PX;
-
-    this.#puzzleBoardElement.innerHTML = "";
-    this.#puzzleBoardElement.style.setProperty(
-      "grid-template-rows",
-      `repeat(${this.#numberOfRows}, auto)`
-    );
-    this.#puzzleBoardElement.style.setProperty(
-      "grid-template-columns",
-      `repeat(${this.#numberOfCols}, minmax(0, auto))`
-    );
-    this.#puzzleBoardElement.style.setProperty(
-      "max-width",
-      `${boardMaxSize}px`
-    );
 
     this.#tiles.forEach((tile, index) => {
       const tileElement = document.createElement("div");
@@ -97,8 +84,23 @@ export class PuzzleBoard {
         tileElement.addEventListener("click", this.#moveTile.bind(this));
       }
 
-      this.#puzzleBoardElement.appendChild(tileElement);
+      fragment.appendChild(tileElement);
     });
+
+    this.#puzzleBoardElement.innerHTML = "";
+    this.#puzzleBoardElement.style.setProperty(
+      "grid-template-rows",
+      `repeat(${this.#numberOfRows}, auto)`
+    );
+    this.#puzzleBoardElement.style.setProperty(
+      "grid-template-columns",
+      `repeat(${this.#numberOfCols}, minmax(0, auto))`
+    );
+    this.#puzzleBoardElement.style.setProperty(
+      "max-width",
+      `${boardMaxSize}px`
+    );
+    this.#puzzleBoardElement.appendChild(fragment);
   }
 
   reset() {
