@@ -29,21 +29,24 @@ export class PuzzleBoard {
     this.#tiles = [];
     this.#totalMoves = 0;
 
-    this.init();
+    this.#init();
   }
 
-  init() {
-    this.#tiles = Array.from(
-      { length: this.#numberOfRows * this.#numberOfCols - 1 },
-      (_, i) => i + 1
-    );
-    this.#tiles.push(0);
-    this.#tiles = shuffleNumbers(this.#tiles);
-    this.#emptyTileIndex = this.#tiles.indexOf(0);
+  #init() {
+    // Prevent generating unsolvable or completed puzzle
+    do {
+      this.#tiles = Array.from(
+        { length: this.#numberOfRows * this.#numberOfCols - 1 },
+        (_, i) => i + 1
+      );
+      this.#tiles.push(0);
+      this.#tiles = shuffleNumbers(this.#tiles);
+      this.#emptyTileIndex = this.#tiles.indexOf(0);
 
-    // Keep a copy of tiles and emptyTileIndex for resetting board
-    this.#originalTiles = [...this.#tiles];
-    this.#originalEmptyTileIndex = this.#emptyTileIndex;
+      // Keep a copy of tiles and emptyTileIndex for resetting board
+      this.#originalTiles = [...this.#tiles];
+      this.#originalEmptyTileIndex = this.#emptyTileIndex;
+    } while (!this.#isBoardSolvable(this.#tiles) || this.#hasWon());
   }
 
   render() {
@@ -97,7 +100,7 @@ export class PuzzleBoard {
 
   reset() {
     this.#totalMoves = 0;
-    this.#tiles = this.#originalTiles;
+    this.#tiles = [...this.#originalTiles];
     this.#emptyTileIndex = this.#originalEmptyTileIndex;
 
     this.render();
@@ -107,9 +110,50 @@ export class PuzzleBoard {
   shuffle() {
     this.#totalMoves = 0;
 
-    this.init();
+    this.#init();
     this.render();
     this.#renderResetMessage();
+  }
+
+  /**
+   * Check the generated puzzle grid is solvable or not.
+   * It would be done with considering total count of inversions, odd or even columns, & empty tile position.
+   * If the number of columns is odd, then the inversions should be even.
+   * If the number of columns is even, then the empty tile row number (counting from bottom) come into play:
+   * If it's even, the inversions should be odd, and vice versa.
+   * @returns {Boolean} solvable status (true or false).
+   */
+  #isBoardSolvable() {
+    const tilesLength = this.#tiles?.length || 0;
+    let inversions = 0;
+
+    for (let i = 0; i < tilesLength; i++) {
+      // Exclude counting empty tile in inversions
+      if (this.#tiles?.[i] === 0) {
+        continue;
+      }
+
+      for (let j = i + 1; j < tilesLength; j++) {
+        if (
+          this.#tiles?.[i] &&
+          this.#tiles?.[j] &&
+          this.#tiles[i] > this.#tiles[j]
+        ) {
+          inversions++;
+        }
+      }
+    }
+
+    if (this.#numberOfCols % 2 !== 0) {
+      return inversions % 2 === 0;
+    } else {
+      const emptyTileRowIndex = this.#getEmptyTileRowIndex();
+      const emptyTileRowNoFromBottom = this.#numberOfRows - emptyTileRowIndex;
+
+      return emptyTileRowNoFromBottom % 2 === 0
+        ? inversions % 2 !== 0
+        : inversions % 2 === 0;
+    }
   }
 
   #swapTiles(tileIndex) {
@@ -139,10 +183,8 @@ export class PuzzleBoard {
       return [];
     }
 
-    const emptyTileRowIndex = Math.floor(
-      this.#emptyTileIndex / this.#numberOfCols
-    );
-    const emptyTileColumnIndex = this.#emptyTileIndex % this.#numberOfCols;
+    const emptyTileRowIndex = this.#getEmptyTileRowIndex();
+    const emptyTileColumnIndex = this.#getEmptyTileColIndex();
     const possibleMoves = [];
 
     if (emptyTileRowIndex > 0) {
@@ -196,9 +238,17 @@ export class PuzzleBoard {
     this.#renderTotalMovesMessage();
   }
 
+  #getEmptyTileRowIndex() {
+    return Math.floor(this.#emptyTileIndex / this.#numberOfCols);
+  }
+
+  #getEmptyTileColIndex() {
+    return this.#emptyTileIndex % this.#numberOfCols;
+  }
+
   #renderTotalMovesMessage() {
     const content = `You've moved ${this.#totalMoves} ${
-      this.#totalMoves > 1 ? "squares" : "square"
+      this.#totalMoves > 1 ? "tiles" : "tile"
     }!`;
 
     this.#renderMessage(content);
