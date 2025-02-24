@@ -1,16 +1,23 @@
 import { PuzzleBoard } from "./puzzle-board.js";
 
-export class Game {
+class Game {
   #id;
   #puzzleBoards;
   #puzzleBoardsElement;
   #templateElement;
+  static instance = null;
 
   constructor() {
-    this.#id = 1;
-    this.#puzzleBoards = new Map();
-    this.#puzzleBoardsElement = document.getElementById("puzzle-boards");
-    this.#templateElement = document.getElementById("puzzle-board-template");
+    if (!Game.instance) {
+      this.#id = 1;
+      this.#puzzleBoards = new Map();
+      this.#puzzleBoardsElement = document.getElementById("puzzle-boards");
+      this.#templateElement = document.getElementById("puzzle-board-template");
+
+      Game.instance = this;
+    }
+
+    return Game.instance;
   }
 
   init(numberOfRows = 4, numberOfCols = 4, tileSizeInPx = 100) {
@@ -18,7 +25,7 @@ export class Game {
     const addButtonElement = document.getElementById("add-button");
 
     this.#puzzleBoardsElement.innerHTML = "";
-    this.addPuzzleBoard(numberOfRows, numberOfCols, tileSizeInPx);
+    this.#addPuzzleBoard(numberOfRows, numberOfCols, tileSizeInPx);
 
     if (newBoardFormElement) {
       newBoardFormElement.addEventListener("submit", (event) => {
@@ -35,7 +42,7 @@ export class Game {
     }
   }
 
-  addPuzzleBoard(numberOfRows, numberOfCols, tileSizeInPx) {
+  #addPuzzleBoard(numberOfRows, numberOfCols, tileSizeInPx) {
     const id = this.#id++;
 
     if (this.#templateElement) {
@@ -84,7 +91,7 @@ export class Game {
 
         if (removeElement) {
           removeElement.addEventListener("click", (e) => {
-            this.removePuzzleBoard(id);
+            this.#removePuzzleBoard(id);
           });
         }
 
@@ -99,11 +106,11 @@ export class Game {
     }
   }
 
-  getPuzzleBoard(id) {
+  #getPuzzleBoard(id) {
     return this.#puzzleBoards.get(id) || null;
   }
 
-  removePuzzleBoard(id) {
+  #removePuzzleBoard(id) {
     const puzzleBoardElement = this.#puzzleBoardsElement.querySelector(
       `[data-id="${id}"]`
     );
@@ -151,7 +158,7 @@ export class Game {
           this.#puzzleBoardsElement.innerHTML = "";
         }
 
-        const newPuzzleBoardId = this.addPuzzleBoard(
+        const newPuzzleBoardId = this.#addPuzzleBoard(
           numberOfRows,
           numberOfCols,
           tileSizeInPx
@@ -174,3 +181,9 @@ export class Game {
     }
   }
 }
+
+const gameRunner = new Game();
+
+Object.freeze(gameRunner);
+
+export default gameRunner;

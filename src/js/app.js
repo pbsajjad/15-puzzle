@@ -1,5 +1,3 @@
-import { Game } from "./game.js";
+import gameRunner from "./game.js";
 
-const game = new Game();
-
-game.init();
+gameRunner.init();
