@@ -84,6 +84,15 @@ class Game {
         this.#puzzleBoards.set(id, puzzleBoard);
         puzzleBoard.render();
 
+        const renderedPuzzleBoardElement = document.querySelector(
+          `[data-id="${id}"]`
+        );
+
+        window.scrollTo({
+          top: renderedPuzzleBoardElement.offsetTop,
+          behavior: "smooth",
+        });
+
         if (resetElement) {
           resetElement.addEventListener("click", (e) => {
             puzzleBoard.reset();

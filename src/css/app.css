@@ -188,6 +188,7 @@ body {
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
     padding-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .puzzle-board-header {
