@@ -140,7 +140,7 @@ export class Game {
     ) {
       const numberOfRows = parseInt(numberOfRowsInputElement.value);
       const numberOfCols = parseInt(numberOfColsInputElement.value);
-      const tileSizeInPx = parseInt(tileSizeInputElement.value);
+      const tileSizeInPx = parseInt(tileSizeInputElement.value) || 100;
 
       numberOfRowsInputElement.classList.remove("error");
       numberOfColsInputElement.classList.remove("error");
@@ -169,10 +169,6 @@ export class Game {
 
         if (!numberOfCols) {
           numberOfColsInputElement.classList.add("error");
-        }
-
-        if (!tileSizeInPx) {
-          tileSizeInputElement.classList.add("error");
         }
       }
     }
