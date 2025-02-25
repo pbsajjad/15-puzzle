@@ -102,6 +102,11 @@ export class PuzzleBoard {
       "click",
       this.#moveTile.bind(this)
     );
+    this.#puzzleBoardElement.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        this.#moveTile(event);
+      }
+    });
     this.#puzzleBoardElement.appendChild(fragment);
   }
 
