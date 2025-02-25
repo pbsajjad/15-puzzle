@@ -131,25 +131,7 @@ export class PuzzleBoard {
    * @returns {Boolean} solvable status (true or false).
    */
   #isBoardSolvable() {
-    const tilesLength = this.#tiles?.length || 0;
-    let inversions = 0;
-
-    for (let i = 0; i < tilesLength; i++) {
-      // Exclude counting empty tile in inversions
-      if (this.#tiles?.[i] === 0) {
-        continue;
-      }
-
-      for (let j = i + 1; j < tilesLength; j++) {
-        if (
-          this.#tiles?.[i] &&
-          this.#tiles?.[j] &&
-          this.#tiles[i] > this.#tiles[j]
-        ) {
-          inversions++;
-        }
-      }
-    }
+    const inversions = this.#getTotalInversions(this.#tiles);
 
     if (this.#numberOfCols % 2 !== 0) {
       return inversions % 2 === 0;
@@ -251,6 +233,27 @@ export class PuzzleBoard {
 
   #getEmptyTileColIndex() {
     return this.#emptyTileIndex % this.#numberOfCols;
+  }
+
+  #getTotalInversions(tilesArray) {
+    const tiles = [...(tilesArray || [])];
+    const tilesLength = tiles.length;
+    let inversions = 0;
+
+    for (let i = 0; i < tilesLength; i++) {
+      // Exclude counting empty tile in inversions
+      if (tiles?.[i] === 0) {
+        continue;
+      }
+
+      for (let j = i + 1; j < tilesLength; j++) {
+        if (tiles?.[i] && tiles?.[j] && tiles[i] > tiles[j]) {
+          inversions++;
+        }
+      }
+    }
+
+    return inversions;
   }
 
   #renderTotalMovesMessage() {
