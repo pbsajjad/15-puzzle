@@ -280,12 +280,9 @@ export class PuzzleBoard {
 
   #renderMessage(content, type) {
     if (content) {
-      const pElement = document.createElement("p");
-
-      pElement.textContent = content;
-      this.#puzzleBoardMessageElement.innerHTML = "";
+      this.#puzzleBoardMessageElement.textContent = content;
       this.#puzzleBoardMessageElement.className = "";
-      this.#puzzleBoardMessageElement.classList.add("message-box");
+      this.#puzzleBoardMessageElement.classList.add("message");
 
       switch (type) {
         case "success":
@@ -294,8 +291,6 @@ export class PuzzleBoard {
         default:
           break;
       }
-
-      this.#puzzleBoardMessageElement.appendChild(pElement);
     }
   }
 }

@@ -52,8 +52,7 @@ class Game {
       const puzzleBoardElement =
         boardTemplateElement.querySelector(".puzzle-board");
       const titleElement = boardTemplateElement.querySelector(".title");
-      const messageBoxElement =
-        boardTemplateElement.querySelector(".message-box");
+      const messageElement = boardTemplateElement.querySelector(".message");
       const puzzleGridElement =
         boardTemplateElement.querySelector(".puzzle-grid");
       const resetElement = boardTemplateElement.querySelector(".reset");
@@ -63,13 +62,13 @@ class Game {
       if (
         puzzleBoardElement &&
         titleElement &&
-        messageBoxElement &&
+        messageElement &&
         puzzleGridElement
       ) {
         puzzleBoardElement.dataset.id = id;
         titleElement.textContent = `Board ${numberOfRows}x${numberOfCols}`;
 
-        puzzleBoardElement.appendChild(messageBoxElement);
+        puzzleBoardElement.appendChild(messageElement);
         puzzleBoardElement.appendChild(puzzleGridElement);
         this.#puzzleBoardsElement.appendChild(puzzleBoardElement);
 
@@ -78,7 +77,7 @@ class Game {
           numberOfCols,
           tileSizeInPx,
           puzzleGridElement,
-          messageBoxElement
+          messageElement
         );
 
         this.#puzzleBoards.set(id, puzzleBoard);

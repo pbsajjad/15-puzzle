@@ -195,13 +195,13 @@ body {
     border-color: var(--danger-color);
 }
 
-.message-box {
+.message {
     padding: 10px;
     font-size: 0.9rem;
     text-align: center;
 }
 
-.message-box.success {
+.message.success {
     border-color: var(--tile-color-success);
     color: var(--tile-color-success);
 }
