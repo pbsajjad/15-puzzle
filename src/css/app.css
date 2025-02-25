@@ -269,25 +269,16 @@ body {
     border-radius: var(--border-radius);
     cursor: pointer;
     user-select: none;
-    outline: none;
-    transition: background-color 0.2s;
+    transition: background-color 0.15s;
 }
 
 .puzzle-grid .tile:hover {
     background-color: var(--tile-color-hover);
 }
 
-.puzzle-grid .tile:focus {
-    border-color: var(--border-color-light);
-}
-
 .puzzle-grid .tile.empty {
     background-color: transparent;
     cursor: default;
-}
-
-.puzzle-grid .tile.empty:focus {
-    border-color: var(--border-color);
 }
 
 .puzzle-grid .tile.done {
