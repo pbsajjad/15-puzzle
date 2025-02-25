@@ -55,32 +55,6 @@ export class PuzzleBoard {
       this.#numberOfCols * this.#tileSizeInPx +
       (this.#numberOfCols - 1) * PuzzleBoard.TILES_GAP_IN_PX;
 
-    this.#tiles?.forEach((tile, index) => {
-      const tileElement = document.createElement("div");
-
-      tileElement.classList.add("tile");
-      tileElement.textContent = tile === 0 ? "" : tile;
-      tileElement.style.setProperty("max-width", `${this.#tileSizeInPx}px`);
-      tileElement.style.setProperty("max-height", `${this.#tileSizeInPx}px`);
-      tileElement.style.setProperty(
-        "font-size",
-        getTileFontSizeInPx(boardMaxSize / this.#numberOfCols)
-      );
-      tileElement.role = "button";
-      tileElement.tabIndex = 0;
-      tileElement.dataset.index = index;
-
-      if (tile === 0) {
-        tileElement.classList.add("empty");
-      }
-
-      if (index + 1 === tile) {
-        tileElement.classList.add("done");
-      }
-
-      fragment.appendChild(tileElement);
-    });
-
     this.#puzzleBoardElement.innerHTML = "";
     this.#puzzleBoardElement.style.setProperty(
       "grid-template-rows",
@@ -107,6 +81,35 @@ export class PuzzleBoard {
         this.#moveTile(event);
       }
     });
+
+    const puzzleBoardElementWidth = this.#puzzleBoardElement.clientWidth;
+
+    this.#tiles?.forEach((tile, index) => {
+      const tileElement = document.createElement("div");
+
+      tileElement.classList.add("tile");
+      tileElement.textContent = tile === 0 ? "" : tile;
+      tileElement.style.setProperty("max-width", `${this.#tileSizeInPx}px`);
+      tileElement.style.setProperty("max-height", `${this.#tileSizeInPx}px`);
+      tileElement.style.setProperty(
+        "font-size",
+        getTileFontSizeInPx(puzzleBoardElementWidth / this.#numberOfCols)
+      );
+      tileElement.role = "button";
+      tileElement.tabIndex = 0;
+      tileElement.dataset.index = index;
+
+      if (tile === 0) {
+        tileElement.classList.add("empty");
+      }
+
+      if (index + 1 === tile) {
+        tileElement.classList.add("done");
+      }
+
+      fragment.appendChild(tileElement);
+    });
+
     this.#puzzleBoardElement.appendChild(fragment);
   }
 

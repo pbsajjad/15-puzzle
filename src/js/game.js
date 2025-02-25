@@ -110,6 +110,8 @@ class Game {
           });
         }
 
+        window.addEventListener("resize", this.#handleChangeTileFontSize);
+
         return id;
       }
     }
@@ -188,6 +190,14 @@ class Game {
         }
       }
     }
+  }
+
+  #handleChangeTileFontSize() {
+    document.querySelectorAll(".tile")?.forEach((tile) => {
+      const tileWidth = tile.clientWidth;
+
+      tile.style.setProperty("font-size", getTileFontSizeInPx(tileWidth));
+    });
   }
 }
 
