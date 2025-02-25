@@ -55,7 +55,7 @@ export class PuzzleBoard {
       this.#numberOfCols * this.#tileSizeInPx +
       (this.#numberOfCols - 1) * PuzzleBoard.TILES_GAP_IN_PX;
 
-    this.#tiles.forEach((tile, index) => {
+    this.#tiles?.forEach((tile, index) => {
       const tileElement = document.createElement("div");
 
       tileElement.classList.add("tile");
@@ -151,6 +151,25 @@ export class PuzzleBoard {
       typeof this.#emptyTileIndex === "number" &&
       !this.#hasWon()
     ) {
+      // Get candidate elements for swapping
+      const emptyTileElement = this.#puzzleBoardElement.querySelector(".empty");
+      const targetTileElement = this.#puzzleBoardElement.querySelector(
+        `[data-index="${tileIndex}"]`
+      );
+      const targetTileNo = targetTileElement.textContent;
+
+      // Swap their content and styles with each other
+      emptyTileElement.textContent = targetTileNo;
+      emptyTileElement.classList.remove("empty");
+
+      if (this.#emptyTileIndex + 1 == +targetTileNo) {
+        emptyTileElement.classList.add("done");
+      }
+
+      targetTileElement.textContent = "";
+      targetTileElement.classList.add("empty");
+      targetTileElement.classList.remove("done");
+
       [this.#tiles[tileIndex], this.#tiles[this.#emptyTileIndex]] = [
         this.#tiles[this.#emptyTileIndex],
         this.#tiles[tileIndex],
@@ -202,7 +221,6 @@ export class PuzzleBoard {
 
       if (possibleMoves?.includes(tileIndex)) {
         this.#swapTiles(tileIndex);
-        this.render();
 
         if (this.#hasWon()) {
           this.#renderWonMessage();
