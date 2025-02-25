@@ -97,35 +97,17 @@ class Game {
           resetElement.addEventListener("click", (event) => {
             puzzleBoard.reset();
           });
-
-          resetElement.addEventListener("keydown", (event) => {
-            if (event.key === "Enter") {
-              puzzleBoard.reset();
-            }
-          });
         }
 
         if (removeElement) {
           removeElement.addEventListener("click", (event) => {
             this.#removePuzzleBoard(id);
           });
-
-          removeElement.addEventListener("keydown", (event) => {
-            if (event.key === "Enter") {
-              this.#removePuzzleBoard(id);
-            }
-          });
         }
 
         if (shuffleElement) {
           shuffleElement.addEventListener("click", (event) => {
             puzzleBoard.shuffle();
-          });
-
-          shuffleElement.addEventListener("keydown", (event) => {
-            if (event.key === "Enter") {
-              puzzleBoard.shuffle();
-            }
           });
         }
 
