@@ -51,9 +51,12 @@ export class PuzzleBoard {
 
   render() {
     const fragment = document.createDocumentFragment();
-    const boardMaxSize =
+    const boardMaxWidth =
       this.#numberOfCols * this.#tileSizeInPx +
       (this.#numberOfCols - 1) * PuzzleBoard.TILES_GAP_IN_PX;
+    const boardMaxHeight =
+      this.#numberOfRows * this.#tileSizeInPx +
+      (this.#numberOfRows - 1) * PuzzleBoard.TILES_GAP_IN_PX;
 
     this.#puzzleBoardElement.innerHTML = "";
     this.#puzzleBoardElement.style.setProperty(
@@ -66,11 +69,11 @@ export class PuzzleBoard {
     );
     this.#puzzleBoardElement.style.setProperty(
       "max-width",
-      `${boardMaxSize}px`
+      `${boardMaxWidth}px`
     );
     this.#puzzleBoardElement.style.setProperty(
       "max-height",
-      `${boardMaxSize}px`
+      `${boardMaxHeight}px`
     );
     this.#puzzleBoardElement.addEventListener(
       "click",
