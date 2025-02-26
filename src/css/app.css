@@ -66,7 +66,6 @@ html {
 
 body {
     font-family: "Quicksand", cursive, Arial;
-    font-display: swap;
     background-color: var(--bg-color);
     color: var(--txt-color);
 }
@@ -343,6 +342,14 @@ body {
         display: block;
     }
 
+    #new-board-form .inputs {
+        gap: 15px;
+    }
+
+    #new-board-form .input-wrapper {
+        max-width: 100%;
+    }
+
     #new-board-form .input {
         margin-bottom: 15px;
     }
@@ -360,10 +367,6 @@ body {
 
     #new-board-form .inputs {
         display: block;
-    }
-
-    #new-board-form .input-wrapper {
-        max-width: 100%;
     }
 
     #new-board-form .actions-wrapper {
