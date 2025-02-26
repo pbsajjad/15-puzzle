@@ -122,23 +122,31 @@ class Game {
   }
 
   #removePuzzleBoard(id) {
-    const puzzleBoardElement = this.#puzzleBoardsElement.querySelector(
-      `[data-id="${id}"]`
-    );
+    // TODO: Show modal instead of browser default confirm
+    const answer = confirm("Are you sure to delete the board?");
 
-    this.#puzzleBoards.delete(id);
+    if (answer) {
+      const puzzleBoardElement = this.#puzzleBoardsElement.querySelector(
+        `[data-id="${id}"]`
+      );
 
-    if (puzzleBoardElement) {
-      puzzleBoardElement.remove();
-    }
+      this.#puzzleBoards.delete(id);
 
-    if (this.#puzzleBoards.size === 0) {
-      const templateElement = document.getElementById("empty-boards-template");
+      if (puzzleBoardElement) {
+        puzzleBoardElement.remove();
+      }
 
-      if (templateElement) {
-        const messageTemplateElement = templateElement.content.cloneNode(true);
+      if (this.#puzzleBoards.size === 0) {
+        const templateElement = document.getElementById(
+          "empty-boards-template"
+        );
 
-        this.#puzzleBoardsElement.appendChild(messageTemplateElement);
+        if (templateElement) {
+          const messageTemplateElement =
+            templateElement.content.cloneNode(true);
+
+          this.#puzzleBoardsElement.appendChild(messageTemplateElement);
+        }
       }
     }
   }
