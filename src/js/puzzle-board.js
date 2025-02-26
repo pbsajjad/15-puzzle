@@ -77,11 +77,11 @@ export class PuzzleBoard {
     );
     this.#puzzleBoardElement.addEventListener(
       "click",
-      this.#moveTile.bind(this)
+      this.#handleMoveTile.bind(this)
     );
     this.#puzzleBoardElement.addEventListener("keydown", (event) => {
       if (event.key === "Enter") {
-        this.#moveTile(event);
+        this.#handleMoveTile(event);
       }
     });
 
@@ -191,7 +191,7 @@ export class PuzzleBoard {
     }
   }
 
-  #getAdjacentTilesForEmptySlot() {
+  #getTilesAdjacentToEmptySlot() {
     if (
       typeof this.#emptyTileIndex !== "number" ||
       !this.#numberOfRows ||
@@ -225,10 +225,10 @@ export class PuzzleBoard {
     return possibleMoves;
   }
 
-  #moveTile(event) {
+  #handleMoveTile(event) {
     if (event?.target) {
       const tileIndex = parseInt(event.target?.dataset?.index || "-1");
-      const possibleMoves = this.#getAdjacentTilesForEmptySlot();
+      const possibleMoves = this.#getTilesAdjacentToEmptySlot();
 
       if (possibleMoves?.includes(tileIndex)) {
         this.#swapTiles(tileIndex);
